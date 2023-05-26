@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { useRecipeStore } from '@/stores'
 import { ref, reactive, computed } from 'vue'
 import type { CreateRecipeModel, IngredientModel } from '@/api/recipes/model'
+import { useRecipeStore } from '@/stores'
+import { useRules } from '@/composable/useRules'
 
 const store = useRecipeStore()
+const { isRequired } = useRules()
 
 const newRecipe = reactive({
   title: '',
@@ -86,21 +88,21 @@ v-dialog(
           v-text-field(
             v-model="newRecipe.title"
             class="mb-1"
-            :rules="rules"
+            :rules="isRequired"
             label="Title"
             density="comfortable"
           )
           v-text-field(
             v-model="newRecipe.image"
             class="mb-1"
-            :rules="rules"
+            :rules="isRequired"
             label="Image url"
             density="comfortable"
           )
           v-select(
             v-model="newRecipe.category"
             class="mb-1"
-            :rules="[v => !!v || 'Category is required']"
+            :rules="isRequired"
             :items="store.getCategories"
             return-object
             label="Category"
@@ -109,14 +111,14 @@ v-dialog(
           v-textarea(
             v-model="newRecipe.description"
             class="mb-1"
-            :rules="rules"
+            :rules="isRequired"
             label="Short Description"
             density="comfortable"
           )
           v-textarea(
             v-model="newRecipe.fullDescription"
             class="mb-1"
-            :rules="rules"
+            :rules="isRequired"
             label="Full Description (Method)"
             density="comfortable"
           )
