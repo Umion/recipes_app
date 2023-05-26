@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { onMounted, computed } from 'vue'
-import { RouterView, useRouter, useRoute } from 'vue-router'
-const router = useRouter()
-const location = useRoute();
+import { RouterView, useRoute } from 'vue-router'
+const route = useRoute();
 
 const layout = computed(() => {
-  return location.meta.layout || "default-layout"
+  return route.meta.layout || "default-layout"
 })
 
 </script>
