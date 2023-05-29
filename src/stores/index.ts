@@ -5,6 +5,8 @@ import type { RecipeModel, CategoryModel } from '@/api/recipes/model'
 interface RecipeState {
   recipes: RecipeModel[]
   categories: CategoryModel[]
+  search: string,
+  filteredCategories: number[]
 }
 
 export const useRecipeStore = defineStore({
@@ -12,10 +14,20 @@ export const useRecipeStore = defineStore({
   state: (): RecipeState => ({
     recipes: [],
     categories: [],
+    search: '',
+    filteredCategories: []
   }),
   getters: {
     getRecipes(): RecipeModel[] {
-      return this.recipes
+      let filtered = this.recipes
+      if (this.search) {
+        filtered = filtered.filter(r => r.title.toLowerCase().includes(this.search.toLowerCase()))
+      }
+      if (this.filteredCategories.length) {
+        filtered = filtered.filter(r => this.filteredCategories.includes(r.category.id))
+      }
+
+      return filtered
     },
     getCategories(): CategoryModel[] {
       return this.categories

@@ -122,7 +122,8 @@ v-dialog(
             label="Full Description (Method)"
             density="comfortable"
           )
-          p Ingredients:
+          p Ingredients: ()
+          p.warning.text-caption(v-if="!newRecipe.ingredients.length") Warning: The number of ingredients must be greater than 0
           p(
             v-for="(item) in newRecipe.ingredients"
             class="text-body-2 mb-2"
@@ -179,3 +180,9 @@ v-dialog(
         @click="submit"
       ) Save
 </template>
+
+<style lang="scss">
+.warning {
+  color: $warning;
+}
+</style>

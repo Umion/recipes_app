@@ -1,0 +1,20 @@
+@use 'vuetify/settings' with (
+  $body-font-family: 'Inter',
+  $heading-font-family: 'Inter'
+);
+
+@import './variables';
+
+// custom style for input
+.v-input--error:not(.v-input--disabled) .v-input__details > .v-icon,
+.v-input--error:not(.v-input--disabled) .v-input__details .v-messages,
+.v-input--error:not(.v-input--disabled) .v-input__prepend > .v-icon,
+.v-input--error:not(.v-input--disabled) .v-input__prepend .v-messages,
+.v-input--error:not(.v-input--disabled) .v-input__append > .v-icon,
+.v-input--error:not(.v-input--disabled) .v-input__append .v-messages {
+  color: $error;
+}
+
+.v-field--error:not(.v-field--disabled) .v-field__outline {
+  color: $error;
+}

@@ -36,6 +36,9 @@ const closeCreateModal = () => {
 const colsCount = computed(() => {
   return xxl.value ? 2 : xl.value ? 3 : lg.value || md.value ? 4 : sm.value ? 6 : 12
 })
+const filterColsCount = computed(() => {
+  return sm.value || xs.value ? 12 : 6
+})
 
 onMounted(() => {
   store.init()
@@ -64,10 +67,33 @@ div
       prepend-icon="mdi-plus"
       @click="showCreateModal"
     ) Add Recipe
+v-row
+  v-col(:cols="filterColsCount")
+    v-text-field(
+      v-model="store.search"
+      variant="outlined"
+      label="search"
+      hide-details
+      density="comfortable"
+    )
+  v-col(:cols="filterColsCount")
+    v-select(
+      v-model="store.filteredCategories"
+      :items="store.getCategories"
+      chips
+      label="Categories"
+      multiple
+      hide-details
+      density="comfortable"
+      item-value="id"
+      variant="outlined"
+      clearable
+    )
 v-row(v-if="!viewType || (sm || xs)")
   v-col(
     v-for="item in store.getRecipes" 
     :cols="colsCount"
+    :key="item.id"
   )
     RecipeCard(
       :recipe="item"
