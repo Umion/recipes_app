@@ -3,6 +3,7 @@ import { onMounted, ref, computed } from 'vue'
 import { useDisplay } from 'vuetify'
 import { useRoute } from 'vue-router'
 import { useRecipeStore } from '@/stores'
+import { getImageUrl } from '@/utils/helper'
 
 const route = useRoute()
 const { lg, xl, xxl } = useDisplay()
@@ -27,7 +28,7 @@ v-row(justify="center")
       p.text-h6.mb-2 Category: {{ recipe.category.title }}
       p.text-body-1.mb-2 {{ recipe.description }}
       .text-center
-        img.recipe__img.mb-3(:src="recipe.image")
+        img.recipe__img.mb-3(:src="getImageUrl(recipe.image)")
       v-card.bg-orange-lighten-5(variant="outlined" color="grey")
         v-card-text.text-black
           h2.text-h5.mb-3 Ingredients:

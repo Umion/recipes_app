@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { RecipeModel } from '@/api/recipes/model'
 import { ref } from 'vue'
+import { getImageUrl } from '@/utils/helper'
 
 const props = defineProps<{
   recipe: RecipeModel
@@ -21,7 +22,7 @@ const emit = defineEmits<{
 v-card(class='h-100')
   .d-flex.flex-column.h-100
     v-img(
-      :src="props.recipe.image"
+      :src="getImageUrl(props.recipe.image)"
       class="align-end flex-shrink-0 flex-grow-0"
       gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
       height="200px"

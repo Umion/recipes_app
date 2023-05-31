@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { getImageUrl } from '@/utils/helper'
 
 const props = defineProps<{
   item: RecipeModel | null
@@ -7,7 +8,6 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: 'cancel'): void
 }>()
-
 </script>
 
 <template lang="pug">
@@ -22,7 +22,7 @@ v-dialog(
     v-divider
     v-card-text(style="height: 600px;")
       p {{ item.description }}
-      img.w-100(:src="item.image")
+      img.w-100(:src="getImageUrl(item.image)")
       h2.text-h5.mb-3 Ingredients:
       .d-flex.align-items-center(v-for="ingredient in item.ingredients" )
         v-icon.mr-3.mb-2(
